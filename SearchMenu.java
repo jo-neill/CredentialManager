@@ -5,63 +5,61 @@
  */
 package credentialmanager;
 
-import java.awt.FlowLayout;
+/**
+ *
+ * @author zzt5046*/
+ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-/**
- *
- * @author zzt5046
- */
-public class LoginMenu extends JFrame implements ActionListener{
 
+public class SearchMenu extends JFrame implements ActionListener{
+    
     private JFrame frame;
     private JPanel panel;
     private JPanel panel2;
     private JPanel panel3;
-    private JLabel usernameLabel;
-    private JLabel passwordLabel;
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JButton submit;
+    private JLabel searchBarLabel;
+    private JTextField searchBar;
+    private JComboBox accountGroups;
+    private JButton search;
     private JButton btnClose;
     
     public static void main(String[] args) {
-        new LoginMenu();
+        new SearchMenu();
     }
     
-     public LoginMenu(){
-        frame = new JFrame("Please enter your username and password.");
+     public SearchMenu(){
+        frame = new JFrame("Please enter your search terms.");
         frame.setLayout(new GridLayout(3,1));
         panel = new JPanel(new FlowLayout());
         panel2 = new JPanel(new FlowLayout());
         panel3 = new JPanel(new FlowLayout());
         
-        usernameLabel = new JLabel("Username:");
-        passwordLabel = new JLabel("Password:");
-        usernameField = new JTextField();
-        passwordField = new JPasswordField();
+        searchBarLabel = new JLabel("Search keywords:");
+        searchBar = new JTextField();
+        searchBar.setColumns(20);
         
-        submit = new JButton("Submit");
-        submit.addActionListener(this);
+        String[] accts = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+        accountGroups = new JComboBox(accts);
+        
+        search = new JButton("Submit");
+        search.addActionListener(this);
         btnClose = new JButton("Close");
         btnClose.addActionListener(this);
         
-        usernameField.setColumns(8);
-        passwordField.setColumns(8);
         
-        panel.add(usernameLabel);
-        panel.add(usernameField);
-        panel2.add(passwordLabel);
-        panel2.add(passwordField);
-        panel3.add(submit);
+        panel.add(searchBarLabel);
+        panel.add(searchBar);
+        panel2.add(accountGroups);
+        panel3.add(search);
         panel3.add(btnClose);
         
         frame.add(panel);
@@ -73,7 +71,7 @@ public class LoginMenu extends JFrame implements ActionListener{
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
      }
-    
+  
     @Override
     public void actionPerformed(ActionEvent e) {
         String arg = e.getActionCommand();
@@ -85,4 +83,4 @@ public class LoginMenu extends JFrame implements ActionListener{
             System.exit(0);
         }
     }
-} 
+  } 
