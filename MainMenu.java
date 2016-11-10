@@ -24,6 +24,10 @@ public class MainMenu extends JFrame implements ActionListener{
     private JButton btnClose;
     private JButton btnAddAccount;
     
+    public static void main(String[] args){
+        new MainMenu();
+    }
+    
     public MainMenu(){
         frame = new JFrame("Choose a feature");
         frame.setLayout(new GridLayout(3,1));
@@ -38,9 +42,9 @@ public class MainMenu extends JFrame implements ActionListener{
         btnAddAccount = new JButton("Add Account");
         btnAddAccount.addActionListener(this);
         
-        panel3.add(btnGenerate);
-        panel3.add(btnClose);
-        panel3.add(btnAddAccount);
+        panel2.add(btnGenerate);
+        panel2.add(btnClose);
+        panel2.add(btnAddAccount);
         
         frame.add(panel);
         frame.add(panel2);
