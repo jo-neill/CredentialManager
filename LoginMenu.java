@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package credentialmanager;
 
 import java.awt.FlowLayout;
@@ -16,12 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-/**
- *
- * @author zzt5046
- */
-public class LoginMenu extends JFrame implements ActionListener{
 
+//GUI for the LoginMenu
+public class LoginMenu extends JFrame implements ActionListener{
     private JFrame frame;
     private JPanel panel;
     private JPanel panel2;
@@ -33,11 +25,11 @@ public class LoginMenu extends JFrame implements ActionListener{
     private JButton submit;
     private JButton btnClose;
     
-    public static void main(String[] args) {
-        new LoginMenu();
-    }
+    private LoginCtrl loginCtrl = null;
     
-     public LoginMenu(){
+    public LoginMenu(LoginCtrl loginCtrl){
+        this.loginCtrl = loginCtrl;
+        
         frame = new JFrame("Please enter your username and password.");
         frame.setLayout(new GridLayout(3,1));
         panel = new JPanel(new FlowLayout());
@@ -48,6 +40,7 @@ public class LoginMenu extends JFrame implements ActionListener{
         passwordLabel = new JLabel("Password:");
         usernameField = new JTextField();
         passwordField = new JPasswordField();
+        passwordField.setActionCommand("");
         
         submit = new JButton("Submit");
         submit.addActionListener(this);
@@ -67,22 +60,35 @@ public class LoginMenu extends JFrame implements ActionListener{
         frame.add(panel);
         frame.add(panel2);
         frame.add(panel3);
-        frame.setSize(410, 300);
+        frame.setSize(350, 200);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
-     }
+        frame.getRootPane().setDefaultButton(submit);
+    }
+    
+    public JFrame getFrame() {
+        return frame;
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         String arg = e.getActionCommand();
         if(arg.equals("Submit")){
-            JOptionPane.showMessageDialog(null, "Login");
-            //Should connect with controller class
+            String username = this.usernameField.getText();
+            char[] password = this.passwordField.getPassword();
+            if (this.loginCtrl.authenticate(username, password) && !username.equals(null) && !(password==null)) {
+                MainMenu useCaseMenu = new MainMenu();
+                this.frame.setVisible(false);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Incorrect username and/or password. Try again.");
+                LoginCtrl theLoginCtrl = new LoginCtrl();
+            }
         }
         else if(arg.equals("Close")){
             System.exit(0);
         }
     }
-} 
+}

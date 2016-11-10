@@ -1,4 +1,3 @@
-
 package credentialmanager;
 
 import java.awt.FlowLayout;
@@ -7,18 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+//GUI for the main menu
 public class AppMenu extends JFrame implements ActionListener{
 
-    private JFrame frame;
-    private JPanel panel1, panel2;
-    private JButton btnOpenLogin, btnClose;
-    
-    public static void main(String[] args) {
-        new AppMenu();
-    }
+    private final JFrame frame;
+    private final JPanel panel1, panel2;
+    private final JButton btnOpenLogin, btnClose;
 
     public AppMenu(){
         frame = new JFrame("Welcome to the Credential Manager!");
@@ -37,7 +32,7 @@ public class AppMenu extends JFrame implements ActionListener{
         
         frame.add(panel1);
         frame.add(panel2);
-        frame.setSize(350, 80);
+        frame.setSize(200, 100);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -48,8 +43,8 @@ public class AppMenu extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String arg = e.getActionCommand();
         if(arg.equals("Login")){
-            JOptionPane.showMessageDialog(null, "Login");
-            //Should open LoginMenu class
+            LoginCtrl loginCtrl = new LoginCtrl();
+            this.frame.setVisible(false);
         }
         else if(arg.equals("Close")){
             System.exit(0);
