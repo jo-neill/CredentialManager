@@ -15,7 +15,7 @@ public class LoginCtrl {
     public boolean authenticate(String username, char[] password) {
         boolean authenticated = false;
         for (int i = 0; i < userList.getListOfUsers().size(); i++) {
-            if (Arrays.equals(userList.getListOfUsers().get(i).getPassword(), password) && userList.getListOfUsers().get(i).getUsername().equalsIgnoreCase(username)) {   System.out.println("Authenticating");
+            if (Arrays.equals(userList.getListOfUsers().get(i).getPassword(), password) && userList.getListOfUsers().get(i).getUsername().equalsIgnoreCase(username)){
                 authenticated = true;
             }
         }
