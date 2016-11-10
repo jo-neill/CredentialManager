@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,11 +30,16 @@ public class AccountView extends JFrame implements ActionListener{
         
         frame = new JFrame("Add a new account");
         frame.setLayout(new GridLayout(3,1));
-        panel1 = new JPanel(new BoxLayout(panel1, BoxLayout.Y_AXIS));
-        panel2 = new JPanel(new BoxLayout(panel2, BoxLayout.Y_AXIS));
-        panel3 = new JPanel(new BoxLayout(panel3, BoxLayout.Y_AXIS));
-        panel4 = new JPanel(new BoxLayout(panel4, BoxLayout.Y_AXIS));
-        panel5 = new JPanel(new BoxLayout(panel5, BoxLayout.Y_AXIS));
+        panel1 = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+        panel2 = new JPanel();
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
+        panel3 = new JPanel();
+        panel3.setLayout(new BoxLayout(panel3, BoxLayout.Y_AXIS));
+        panel4 = new JPanel();
+        panel4.setLayout(new BoxLayout(panel4, BoxLayout.Y_AXIS));
+        panel5 = new JPanel();
+        panel5.setLayout(new BoxLayout(panel5, BoxLayout.Y_AXIS));
         
         accountLabel = new JLabel("Account title:");
         accountField = new JTextField();
@@ -89,14 +95,14 @@ public class AccountView extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String arg = e.getActionCommand();
         if(arg.equals("Submit")){
-            if(passwordField == rePasswordField && accountField != null && passwordField != null && usernameField != null){
+            if(Arrays.equals(passwordField.getPassword(),rePasswordField.getPassword()) && accountField != null && passwordField != null && usernameField != null){
                 String account = this.accountField.getText();
                 String username = this.usernameField.getText();
                 char[] password = this.passwordField.getPassword();
                 Account newAccount = new Account(account, username, password);
                 acctCtrl.setAccount(newAccount);
             }
-            else if(this.passwordField.getPassword() != this.rePasswordField.getPassword()){
+            else if(Arrays.equals(this.passwordField.getPassword(),this.rePasswordField.getPassword())){
                 JOptionPane.showMessageDialog(null, "Your passwords do not match, try again!");
             }
             else{
