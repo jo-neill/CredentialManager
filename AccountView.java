@@ -102,7 +102,7 @@ public class AccountView extends JFrame implements ActionListener{
                 Account newAccount = new Account(account, username, password);
                 acctCtrl.setAccount(newAccount);
             }
-            else if(Arrays.equals(this.passwordField.getPassword(),this.rePasswordField.getPassword())){
+            else if(!Arrays.equals(this.passwordField.getPassword(),this.rePasswordField.getPassword())){
                 JOptionPane.showMessageDialog(null, "Your passwords do not match, try again!");
             }
             else{
